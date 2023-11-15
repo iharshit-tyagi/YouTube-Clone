@@ -7,10 +7,12 @@ const VideoCard = ({ vid }) => {
   return (
     <div className=" p-2 shadow-sm">
       <img className="rounded-lg" alt="thumbnail" src={url} />
-      <p className="font-semibold">{title}</p>
-      <p>
-        {channelTitle}-{viewCount} Views
-      </p>
+      <ul>
+        <li className="font-semibold">{title}</li>
+        <li>
+          {channelTitle}-{viewCount} Views
+        </li>
+      </ul>
     </div>
   );
 };
