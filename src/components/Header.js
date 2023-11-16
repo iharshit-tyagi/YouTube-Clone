@@ -5,6 +5,7 @@ import userIcon from "../utils/images/user_icon.png";
 import youTubeLogo from "../utils/images/youtube_logo.jpg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { SEARCH_SUGGESTIONS_API } from "../utils/constants";
 const Header = () => {
   const dispatch = useDispatch();
   const toggleMenuHandle = () => {
@@ -13,13 +14,17 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log(searchQuery);
+      getSearchSuggestions();
     }, 200);
     //Below method is called when the component is being destroyed/umounted - Just before re-render
     return () => {
       clearTimeout(timer); ///for clearaing the timer if the next change happened within 200ms
     };
   }, [searchQuery]);
+  const getSearchSuggestions = async () => {
+    const data = await fetch(SEARCH_SUGGESTIONS_API + searchQuery);
+    const json = await data.json();
+  };
   return (
     <div className="grid grid-flow-col p-2 m-2 shadow-lg">
       <div className="flex col-span-1">
