@@ -17,7 +17,6 @@ const WatchPage = () => {
   const getVideoInfo = async () => {
     const data = await fetch(YOUTUBE_VIDEO_INFO_URL + params.get("v"));
     const json = await data.json();
-    console.log(json.items[0]);
     setVideoInfo(json.items[0]);
   };
   if (Object.keys(videoInfo).length === 0) return <h1>Hi</h1>;
