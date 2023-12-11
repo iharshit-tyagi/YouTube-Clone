@@ -10,3 +10,7 @@ export const YOUTUBE_VIDEO_INFO_URL =
   "&id=";
 export const SEARCH_SUGGESTIONS_API =
   "https://corsproxy.io?https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+export const VIDEO_COMMENTS_INFO_API =
+  "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&key=" +
+  GOOGLE_API_KEY +
+  "&videoId=_VB39Jo8mAQ";

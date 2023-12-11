@@ -5,7 +5,8 @@ const SideBar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   if (!isMenuOpen) return null;
   return (
-    <div className="w-44 ml-2 shadow-lg">
+    <div className="fixed  bg-white text-black w-1/6 p-4">
+      <div className="container mx-auto flex justify-between items-center"></div>
       <ul className="text-lg  border-b border-gray-300 ">
         <li>
           <Link to={"/"}>Home</Link>

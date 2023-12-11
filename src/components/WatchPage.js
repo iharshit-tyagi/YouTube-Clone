@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
-import { YOUTUBE_VIDEO_INFO_URL } from "../utils/constants";
+import {
+  YOUTUBE_VIDEO_INFO_URL,
+  VIDEO_COMMENTS_INFO_API,
+} from "../utils/constants";
 import VideoPlayer from "./VideoPlayer";
+import CommentsContainer from "./CommentsContainer";
+import LiveChatContainer from "./LiveChatContainer";
 
 const WatchPage = () => {
   const [videoInfo, setVideoInfo] = useState({});
@@ -11,6 +16,7 @@ const WatchPage = () => {
   useEffect(() => {
     dispatch(closeMenu());
     getVideoInfo();
+    getCommentsInfo();
   }, []);
 
   const [params] = useSearchParams();
@@ -19,18 +25,30 @@ const WatchPage = () => {
     const json = await data.json();
     setVideoInfo(json.items[0]);
   };
+  const getCommentsInfo = async () => {
+    console.log(VIDEO_COMMENTS_INFO_API + params.get("v"));
+    const data = await fetch(VIDEO_COMMENTS_INFO_API + params.get("v"));
+    const json = await data.json();
+    console.log(json);
+  };
   if (Object.keys(videoInfo).length === 0) return <h1>Hi</h1>;
-
+  console.log(videoInfo);
   const { snippet, contentDetails, statistics } = videoInfo;
+  console.log(videoInfo);
+
   return (
-    <div className="flex gap-5">
-      <div className="">
+    <div className="mt-4  mx-14 flex gap-5 w-full ">
+      <div className=" w-3/5 border">
         <VideoPlayer info={params.get("v")} />
-        <h2 className="text-xl font-bold ">{snippet.title}</h2>
+        <h2 className="text-xl font-bold mt-4">{snippet.title}</h2>
         <div>
           <h2>{snippet.channelTitle}</h2>
           <h2>{statistics.likeCount} Likes</h2>
         </div>
+        <CommentsContainer />
+      </div>
+      <div className="border border-black flex-1 p-4 bg-slate-100 rounded-lg ">
+        <LiveChatContainer />
       </div>
     </div>
   );
