@@ -37,8 +37,8 @@ const WatchPage = () => {
   console.log(videoInfo);
 
   return (
-    <div className="mt-4  mx-14 flex gap-5 w-full ">
-      <div className=" w-3/5 border">
+    <div className="mt-4  mx-14 flex gap-7 w-full ">
+      <div className=" w-3/5 border flex-shrink-0">
         <VideoPlayer info={params.get("v")} />
         <h2 className="text-xl font-bold mt-4">{snippet.title}</h2>
         <div>
@@ -47,8 +47,12 @@ const WatchPage = () => {
         </div>
         <CommentsContainer />
       </div>
-      <div className="border border-black flex-1 p-4 bg-slate-100 rounded-lg ">
+      <div className="border border-black flex-grow p-4 h-[500]  rounded-lg mr-4 ">
         <LiveChatContainer />
+        <div className="">
+          <input className="" type="text border" />
+          <button>Submit</button>
+        </div>
       </div>
     </div>
   );
