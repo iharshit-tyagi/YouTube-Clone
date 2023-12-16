@@ -50,9 +50,9 @@ const Header = () => {
           alt="menu"
           src={hamburgerIcon}
         />
-        {/* <Link to={"/"}> */}
-        <img className="h-8 mx-4" alt="YouTube" src={youTubeLogo} />
-        {/* </Link> */}
+        <a className = "cursor-pointer" href="/">
+        <img className="h-8 mx-4 cursor-pointer" alt="YouTube" src={youTubeLogo} />
+        </a>
       </div>
       <div className=" col-span-10 ">
         <input
