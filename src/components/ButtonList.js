@@ -1,20 +1,31 @@
 import Button from "./Button";
+import { useState, useEffect } from "react";
+import { VIDEO_CATEGORIES_API, GOOGLE_API_KEY } from "../utils/constants";
 const ButtonList = () => {
-  const btnList = [
-    "All",
-    "Mixes",
-    "Music",
-    "Cooking",
-    "Gadgets",
-    "Javascript",
-    "Indian Pop Music",
-    "Live",
-    "New To You",
-  ];
+  const [categoryList, setCategoryList] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      console.log(VIDEO_CATEGORIES_API + GOOGLE_API_KEY);
+      const data = await fetch(VIDEO_CATEGORIES_API + GOOGLE_API_KEY);
+      const json = await data.json();
+      setCategoryList(json.items);
+    };
+    console.log(categoryList);
+    getData();
+  }, []);
+  if (categoryList.length === 0) return null;
   return (
     <div className="flex">
-      {btnList.map((ele, index) => {
-        return <Button key={index} name={ele} />;
+      {categoryList.map((category, index) => {
+        return (
+          index <= 7 && (
+            <Button
+              key={category.id}
+              categoryId={category.id}
+              name={category?.snippet?.title}
+            />
+          )
+        );
       })}
     </div>
   );
